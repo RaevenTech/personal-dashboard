@@ -1,12 +1,18 @@
 /* https://css-tricks.com/perfect-full-page-background-image/#awesome-easy-progressive-css3-way) */
 
+* {
+  box-sizing: border-box;
+  user-select: none;
+}
+
 html,
 body {
   margin: 0em;
   padding: 0em;
-  user-select: none;
   font-family: 'Poppins', sans-serif;
   color: whitesmoke;
+  text-shadow: 0px 0px 2px black, 0px 0px 15px #aaaaaa;
+
 }
 
 body {
@@ -17,7 +23,28 @@ body {
   background-size: cover;
 }
 
+.main-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.crypto-weather-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5em;
+}
+
+.time-container {
+  text-align: center;
+}
+
 .photo-author {
+  font-size: 1.2rem;
   font-weight: 400;
   letter-spacing: 1px;
+  margin-bottom: 0em;
+  padding-left: 1.5em;
+  padding-bottom: 1.5em;
 }
