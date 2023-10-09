@@ -1,6 +1,8 @@
 const unsplashBaseURL = "https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature"
 const cryptoBaseURL = "https://api.coingecko.com/api/v3"
 const timeEl = document.getElementById("time-container")
+const cryptoEl = document.getElementById("crypto")
+console.log(cryptoEl)
 
 const getUnsplashImage = () => {
   fetch(unsplashBaseURL, {method:"GET"})
@@ -18,8 +20,27 @@ getUnsplashImage()
 
 const getCryptoData = () => {
   fetch(cryptoBaseURL + "/coins/dogecoin", {method:"GET"})
-    .then(resp => resp.json())
-    .then(respData => console.log(respData))
+    .then(resp => {
+      if(!resp.ok){
+        throw Error("Something went wrong")
+      }
+      return resp.json()
+    })
+    .then(respData => {
+      cryptoEl.innerHTML = `
+        <div class="crypto-img-name">
+          <img src="${respData.image.small}" alt="" /><span class="crypto-name">${respData.name}</span>
+        </div>
+        <p class="current-price crypto-data" id="current-price">Current price: 💶
+          <span class="current-amount amount">€ ${respData.market_data.current_price.eur}</span>
+        </p>
+        <p class="high-price crypto-data" id="current-price">24hour high: ⬆️ 
+          <span class="high-amount amount">€ ${respData.market_data.high_24h.eur}</span>
+        </p>
+        <p class="low-price crypto-data" id="current-price">24hour low: ⬇️
+          <span class="low-amount amount">€ ${respData.market_data.low_24h.eur}</span>
+        </p>`
+    })
 }
 
 getCryptoData()

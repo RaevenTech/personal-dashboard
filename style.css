@@ -36,6 +36,44 @@ body {
   padding: 1.5em;
 }
 
+.crypto {
+  font-size: 1.3rem;
+}
+
+.crypto-img-name {
+  display: flex;
+  align-items: center;
+  gap: .5em;
+}
+
+.crypto-name {
+  letter-spacing: 1px;
+}
+
+.crypto-data {
+  margin: 0.05em;
+  font-size: 1rem;
+}
+
+.amount {
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.current-amount {
+  color: rgb(28, 28, 28);
+  text-shadow: 0px 0px 15px #aaaaaa;
+}
+
+.high-amount {
+  color: lawngreen;
+}
+
+.low-amount {
+  color: orangered;
+  border: none;
+}
+
 .time-container {
   text-align: center;
 }
