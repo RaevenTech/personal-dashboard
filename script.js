@@ -76,11 +76,22 @@ const getWeatherData = () => {
       .then(respData => {
         const iconURL = `https://openweathermap.org/img/wn/${respData.weather[0].icon}@2x.png`
         weatherEl.innerHTML = `
+        <div class="weather-icon-temp">
           <img class="weather-icon" src="${iconURL}" alt="Weather icon"/>
-          <h1 class="location-temp">${Math.round(respData.main.temp)}º</h1>
-          <h3 class="location-name">${respData.name}</h3>
+          <h1 class="location-temp" id="location-temp">${Math.round(respData.main.temp)}º</h1>
+        </div>
+        <h3 class="location-name">${respData.name}</h3>
         `
-        console.log(respData)
+      const localTemp = document.getElementById("location-temp")  
+      if(`${respData.main.temp} > 29` ){
+          localTemp.style.color = "orangered"
+      }
+      else if(`${respData.main.temp} > 29` ){
+        localTemp.style.color = "lawngreen"
+      }
+      else {
+        localTemp.style.color = "ornflowerblue"
+      }
       })
       .catch(err => console.error(err))
   });
