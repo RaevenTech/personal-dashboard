@@ -1,6 +1,7 @@
 const unsplashBaseURL = "https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature"
 const cryptoBaseURL = "https://api.coingecko.com/api/v3"
-const timeEl = document.getElementById("time-container")
+const timeEl = document.getElementById("time")
+const dateEl = document.getElementById("date")
 const cryptoEl = document.getElementById("crypto")
 console.log(cryptoEl)
 
@@ -44,6 +45,18 @@ const getCryptoData = () => {
 }
 getCryptoData()
 
-const getTime = new Date().toLocaleTimeString("en-pt", {timeStyle: "short"})
-const getDate = new Date().toLocaleDateString("en-pt", {dateStyle:"medium"})
-console.log(getDate)
+const getTime = () => {
+  setInterval(function(){
+    const time = new Date().toLocaleTimeString("en-pt", {timeStyle: "short"})
+    timeEl.innerHTML = time
+  },1000)
+}
+getTime()
+
+const getDate = () => {
+  setInterval(function(){
+    const date = new Date().toLocaleDateString("en-pt", {dateStyle:"medium"})
+    dateEl.innerHTML = date
+  },1000)
+}
+getDate()

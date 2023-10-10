@@ -76,6 +76,12 @@ body {
 
 .time-container {
   text-align: center;
+  font-size: 1.5rem;
+}
+
+.time,
+.date {
+  margin: 0em;
 }
 
 .photo-author {
