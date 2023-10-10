@@ -3,7 +3,7 @@ const cryptoBaseURL = "https://api.coingecko.com/api/v3"
 const timeEl = document.getElementById("time")
 const dateEl = document.getElementById("date")
 const cryptoEl = document.getElementById("crypto")
-console.log(cryptoEl)
+//console.log(cryptoEl)
 
 const getUnsplashImage = () => {
   fetch(unsplashBaseURL, {method:"GET"})
@@ -42,6 +42,7 @@ const getCryptoData = () => {
           <span class="low-amount amount">€ ${respData.market_data.low_24h.eur}</span>
         </p>`
     })
+    .catch(err => console.error(err))
 }
 getCryptoData()
 
@@ -60,3 +61,33 @@ const getDate = () => {
   },1000)
 }
 getDate()
+
+
+const getWeatherData = () => {
+  navigator.geolocation.getCurrentPosition(position => {
+    fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric`)
+      .then(resp => {
+        if(!resp.ok){
+          throw Error("Weather data not available")
+        }
+        return resp.json()
+      })
+      .then(respData => {
+        console.log(respData)
+      })
+      .catch(err => console.error(err))
+  });
+}
+getWeatherData()
+
+// position: GeolocationPosition
+    // coords: GeolocationCoordinates
+        // accuracy: 20
+        // altitude: null
+        // altitudeAccuracy: null
+        // heading: null
+        // latitude: 40.5269232
+        // longitude: -111.916174
+        // speed: null
+        // __proto__: GeolocationCoordinates
+    // timestamp: 1623170827394
