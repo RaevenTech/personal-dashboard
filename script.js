@@ -42,5 +42,8 @@ const getCryptoData = () => {
         </p>`
     })
 }
-
 getCryptoData()
+
+const getTime = new Date().toLocaleTimeString("en-pt", {timeStyle: "short"})
+const getDate = new Date().toLocaleDateString("en-pt", {dateStyle:"medium"})
+console.log(getDate)
