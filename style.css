@@ -77,7 +77,9 @@ body {
 
 .weather-icon-temp {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: flex-end;
   margin: 0em;
 }
 
@@ -89,6 +91,7 @@ body {
 
 .location-temp {
   font-size: 3.5rem;
+  text-align: right;
 }
 
 .time-container {
@@ -108,4 +111,32 @@ body {
   margin-bottom: 0em;
   padding-left: 1.5em;
   padding-bottom: 1.5em;
+}
+
+
+/* ----------------- media query ------------------------- */
+
+@media (max-width: 425px) {
+  .crypto-weather-container {
+    padding: .75em;
+  }
+
+  .location-name {
+    font-weight: 400;
+    font-size: .8rem;
+    padding-left: 3.5em;
+  }
+
+  .location-temp {
+    font-size: 1.5rem;
+  }
+
+  .weather-icon {
+    width: 60px;
+  }
+
+  .photo-author {
+    padding: .5em;
+    font-size: .8rem;
+  }
 }
