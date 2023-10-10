@@ -61,8 +61,9 @@ body {
 }
 
 .current-amount {
+  font-weight: 700;
   color: rgb(28, 28, 28);
-  text-shadow: 0px 0px 15px #aaaaaa;
+  text-shadow: 0px 0px 4px white, 0px 0px 15px #aaaaaa;
 }
 
 .high-amount {

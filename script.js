@@ -3,6 +3,7 @@ const cryptoBaseURL = "https://api.coingecko.com/api/v3"
 const timeEl = document.getElementById("time")
 const dateEl = document.getElementById("date")
 const cryptoEl = document.getElementById("crypto")
+const weatherEl = document.getElementById("weather")
 //console.log(cryptoEl)
 
 const getUnsplashImage = () => {
@@ -73,6 +74,12 @@ const getWeatherData = () => {
         return resp.json()
       })
       .then(respData => {
+        const iconURL = `https://openweathermap.org/img/wn/${respData.weather[0].icon}@2x.png`
+        weatherEl.innerHTML = `
+          <img class="weather-icon" src="${iconURL}" alt="Weather icon"/>
+          <h1 class="location-temp">${Math.round(respData.main.temp)}º</h1>
+          <h3 class="location-name">${respData.name}</h3>
+        `
         console.log(respData)
       })
       .catch(err => console.error(err))
