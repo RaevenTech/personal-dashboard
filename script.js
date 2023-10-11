@@ -11,7 +11,7 @@ const getUnsplashImage = () => {
     .then(resp => resp.json())
     .then(respData => {
     document.body.style.backgroundImage = `url(${respData.urls.regular})`
-    document.getElementById("photo-author").innerText = `By: ${respData.user.name}`
+    document.getElementById("photo-author").innerText = `Photo by: ${respData.user.name}`
     //console.log(respData)
   })
   .catch( err => {
@@ -65,47 +65,38 @@ getDate()
 
 
 const getWeatherData = () => {
-  navigator.geolocation.getCurrentPosition(position => {
-    fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric`)
-      .then(resp => {
-        if(!resp.ok){
-          throw Error("Weather data not available")
+  setInterval(function(){
+    navigator.geolocation.getCurrentPosition(position => {
+      fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric`)
+        .then(resp => {
+          if(!resp.ok){
+            throw Error("Weather data not available")
+          }
+          return resp.json()
+        })
+        .then(respData => {
+          const iconURL = `https://openweathermap.org/img/wn/${respData.weather[0].icon}@2x.png`
+          weatherEl.innerHTML = `
+          <div class="weather-icon-temp">
+            <img class="weather-icon" src="${iconURL}" alt="Weather icon"/>
+            <h1 class="location-temp" id="location-temp">${Math.round(respData.main.temp)}º</h1>
+          </div>
+          <h3 class="location-name">${respData.name}</h3>
+          `
+        const localTemp = document.getElementById("location-temp")  
+        if(`${respData.main.temp} > 29` ){
+            localTemp.style.color = "orangered"
         }
-        return resp.json()
-      })
-      .then(respData => {
-        const iconURL = `https://openweathermap.org/img/wn/${respData.weather[0].icon}@2x.png`
-        weatherEl.innerHTML = `
-        <div class="weather-icon-temp">
-          <img class="weather-icon" src="${iconURL}" alt="Weather icon"/>
-          <h1 class="location-temp" id="location-temp">${Math.round(respData.main.temp)}º</h1>
-        </div>
-        <h3 class="location-name">${respData.name}</h3>
-        `
-      const localTemp = document.getElementById("location-temp")  
-      if(`${respData.main.temp} > 29` ){
-          localTemp.style.color = "orangered"
-      }
-      else if(`${respData.main.temp} > 29` ){
-        localTemp.style.color = "lawngreen"
-      }
-      else {
-        localTemp.style.color = "ornflowerblue"
-      }
-      })
-      .catch(err => console.error(err))
-  });
+        else if(`${respData.main.temp} > 29` ){
+          localTemp.style.color = "lawngreen"
+        }
+        else {
+          localTemp.style.color = "ornflowerblue"
+        }
+        })
+        .catch(err => console.error(err))
+    })
+  },1000)
+  
 }
 getWeatherData()
-
-// position: GeolocationPosition
-    // coords: GeolocationCoordinates
-        // accuracy: 20
-        // altitude: null
-        // altitudeAccuracy: null
-        // heading: null
-        // latitude: 40.5269232
-        // longitude: -111.916174
-        // speed: null
-        // __proto__: GeolocationCoordinates
-    // timestamp: 1623170827394
